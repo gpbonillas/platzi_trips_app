@@ -9,7 +9,6 @@ class PlatziTrips extends StatefulWidget {
     // TODO: implement createState
     return _PlatziTrips();
   }
-
 }
 
 class _PlatziTrips extends State<PlatziTrips> {
@@ -21,21 +20,16 @@ class _PlatziTrips extends State<PlatziTrips> {
   ];
 
   void onTapTapped(int index){
-
     setState(() {
       indexTap = index;
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
-
-    return
-
-      Scaffold(
+    return Scaffold(
       body: widgetsChildren[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
@@ -48,15 +42,15 @@ class _PlatziTrips extends State<PlatziTrips> {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text("")
+                label: ''
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.search),
-                  title: Text("")
+                  label: ''
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person),
-                  title: Text("")
+                  label: ''
               ),
             ]
         ),
