@@ -13,7 +13,7 @@ class FloatingActionButtonGreen extends StatefulWidget {
 class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen> {
 
   void onPressedFav(){
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Agregaste a tus Favoritos"),
         )
