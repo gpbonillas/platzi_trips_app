@@ -27,12 +27,13 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  # To check null-safety on project's dependencies use: dart pub outdated --mode=null-safety
   cupertino_icons: ^1.0.2
-  generic_bloc_provider: ^1.0.8
-  firebase_auth:
+  generic_bloc_provider: 2.0.0-nullsafety.1
+  firebase_auth: 1.0.0
   google_sign_in:
-  firebase_storage: ^2.1.0
-  cloud_firestore: ^0.9.13
+  firebase_storage: 8.0.0
+  cloud_firestore: 1.0.0
 
 dev_dependencies:
   flutter_test:
