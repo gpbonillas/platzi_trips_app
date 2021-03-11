@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trips_app/Place/ui/screens/home_trips.dart';
 import 'package:platzi_trips_app/Place/ui/screens/search_trips.dart';
 import 'package:platzi_trips_app/User/ui/screens/profile_trips.dart';
+
+import 'User/bloc/bloc_user.dart';
 
 class PlatziTrips extends StatefulWidget {
   @override
@@ -16,7 +19,7 @@ class _PlatziTrips extends State<PlatziTrips> {
   final List<Widget> widgetsChildren = [
     HomeTrips(),
     SearchTrips(),
-    ProfileTrips()
+    BlocProvider<UserBloc>(bloc: UserBloc(), child: ProfileTrips())
   ];
 
   void onTapTapped(int index){
