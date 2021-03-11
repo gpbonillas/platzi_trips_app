@@ -24,6 +24,8 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _handleCurrentSession(){
+    // El StreamBuilder es como un listener que detecta un cambio de estado
+    // en la sesión. Si se termina la sesión se dispara el código
     return StreamBuilder(
       stream: userBloc.authStatus,
       builder: (BuildContext context, AsyncSnapshot  snapshot) {
