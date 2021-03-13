@@ -4,7 +4,6 @@ import 'package:platzi_trips_app/widgets/gradient_back.dart';
 import 'package:platzi_trips_app/widgets/button_green.dart';
 import 'package:platzi_trips_app/User/bloc/bloc_user.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:platzi_trips_app/platzi_trips.dart';
 import 'package:platzi_trips_app/User/model/user.dart' as userModel;
 
@@ -45,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          GradientBack("", null),
+          GradientBack(height: null),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
