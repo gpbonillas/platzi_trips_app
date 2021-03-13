@@ -41,7 +41,7 @@ class GradientBack extends StatelessWidget {
         fit: BoxFit.none,
         alignment: Alignment(-1.15, -0.8),
         child: Container(
-          width: screenWidth,
+          width: screenHeight,
           height: screenHeight,
           decoration: BoxDecoration(
             color: Color.fromRGBO(0, 0, 0, 0.05),

@@ -15,22 +15,24 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
 
   UserBloc userBloc;
+  double screenWidth;
 
   @override
   Widget build(BuildContext context) {
     // Instanciar el objeto usando el BlocProvider
+    screenWidth = MediaQuery.of(context).size.width;
     userBloc = BlocProvider.of(context);
     return _handleCurrentSession();
   }
 
-  Widget _handleCurrentSession(){
+  Widget _handleCurrentSession() {
     // El StreamBuilder es como un listener que detecta un cambio de estado
     // en la sesión. Si se termina la sesión se dispara el código
     return StreamBuilder(
       stream: userBloc.authStatus,
-      builder: (BuildContext context, AsyncSnapshot  snapshot) {
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
         // snapshot - data - Object User
-        if(!snapshot.hasData || snapshot.hasError) {
+        if (!snapshot.hasData || snapshot.hasError) {
           return signInGoogleUI();
         } else {
           return PlatziTrips();
@@ -48,15 +50,21 @@ class _SignInScreenState extends State<SignInScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Welcome \n This is your Travel App",
-                style: TextStyle(
-                  fontSize: 37.0,
-                  fontFamily: "Lato",
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-                ),
+              Flexible(
+                  child: Container(
+                    width: screenWidth,
+                    child: Text(
+                      "Welcome \n This is your Travel App",
+                      style: TextStyle(
+                          fontSize: 37.0,
+                          fontFamily: "Lato",
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  )
               ),
+
               ButtonGreen(
                 text: "Login with Gmail",
                 onPressed: () {
