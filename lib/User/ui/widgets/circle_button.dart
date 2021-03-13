@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class CircleButton extends StatefulWidget {
@@ -35,6 +33,7 @@ class _CircleButton extends State<CircleButton> {
             size: widget.iconSize,
             color: Color(0xFF4268D3),
           ),
+          heroTag: null,
         )
     );
   }
