@@ -22,6 +22,7 @@ class TextInput extends StatelessWidget {
       child: TextField(
         controller: controller,
         keyboardType: inputType,
+        maxLines: maxLines,
         style: TextStyle(
           fontSize: 15.0,
           fontFamily: "Lato",
