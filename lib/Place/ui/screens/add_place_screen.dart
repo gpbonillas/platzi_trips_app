@@ -64,7 +64,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   child: CardImageWithFabIcon(
                     pathImage: "assets/img/sunset.jpeg", // widget.image.path
                     iconData: Icons.camera,
-                    width: 350.0,
+                    width: MediaQuery.of(context).size.width * 0.90,
                     height: 250.0,
                     left: 0.0,
                   ),
