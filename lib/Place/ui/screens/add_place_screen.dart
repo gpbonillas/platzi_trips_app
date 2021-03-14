@@ -65,10 +65,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     iconData: Icons.camera,
                     width: 350.0,
                     height: 250.0,
+                    left: 0.0,
                   ),
                 ), // Foto
                 Container( // TextField Title
-                  margin: EdgeInsets.only(bottom: 20.0),
+                  margin: EdgeInsets.only(top: 25.0, bottom: 20.0),
                   child: TextInput(
                     hintText: "Title",
                     inputType: null,
