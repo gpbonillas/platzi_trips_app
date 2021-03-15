@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trips_app/Place/model/place.dart';
@@ -101,24 +102,46 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   child: ButtonPurple(
                     buttonText: "Add Place",
                     onPressed: () {
-                      // 1. Firebase Storage
-                      // url -
-                      // ID del usuario logueado actualmente
-                      userBloc.currentUser().then((User user) {
-                        if(user != null) {
-                          
-                        }
-                      });
 
-                      // 2. Cloud Firestore
-                      // Place - title, description, url, userOwner, likes
-                      userBloc.updatePlaceData(Place(
-                        name: _controllerTitlePlace.text,
-                        description: _controllerDescriptionPlace.text,
-                        likes: 0,
-                      )).whenComplete(() {
-                        print("TERMINÓ");
-                        Navigator.pop(context);
+                      // ID del usuario logueado actualmente
+                      userBloc.currentUser().then((User user) async {
+                        if(user != null) {
+                          String uid = user.uid;
+                          String path = "${uid}/${DateTime.now().toString()}.jpg";
+                          // 1. Firebase Storage
+
+                          final uploadTask = await userBloc.uploadFile(path, widget.image);
+                          if(uploadTask == null){
+                            print('Null upload task');
+                            return;
+                          }
+
+                          TaskSnapshot taskSnapshot = await uploadTask;
+                          if(taskSnapshot == null){
+                            print('Null task snapshot');
+                            return;
+                          }
+
+                          final imageUrl = await taskSnapshot.ref.getDownloadURL();
+                          if(imageUrl == null){
+                            print('Null image URL');
+                            return;
+                          }
+
+                          print('Image url: $imageUrl');
+
+                          // 2. Cloud Firestore
+                          // Place - title, description, url, userOwner, likes
+                          userBloc.updatePlaceData(Place(
+                              name: _controllerTitlePlace.text,
+                              description: _controllerDescriptionPlace.text,
+                              likes: 0,
+                            )).whenComplete(() {
+                              print("TERMINÓ");
+                              Navigator.pop(context);
+                            }
+                          );
+                        }
                       });
                     },
                   ),
