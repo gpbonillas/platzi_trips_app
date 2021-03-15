@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trips_app/Place/model/place.dart';
@@ -102,6 +103,13 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     onPressed: () {
                       // 1. Firebase Storage
                       // url -
+                      // ID del usuario logueado actualmente
+                      userBloc.currentUser().then((User user) {
+                        if(user != null) {
+                          
+                        }
+                      });
+
                       // 2. Cloud Firestore
                       // Place - title, description, url, userOwner, likes
                       userBloc.updatePlaceData(Place(
