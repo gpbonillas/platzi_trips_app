@@ -57,8 +57,8 @@ class UserBloc implements Bloc {
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot)
   => _cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
 
-  // ignore: close_sinks
-  StreamController<Place> placeSelectedStreamController =  StreamController<Place>();
+
+  StreamController<Place> placeSelectedStreamController =  StreamController<Place>.broadcast();
   Stream<Place> get placeSelectedStream => placeSelectedStreamController.stream;
   StreamSink<Place> get placeSelectedSink =>  placeSelectedStreamController.sink;
 
@@ -73,6 +73,8 @@ class UserBloc implements Bloc {
 
   @override
   void dispose() {
+    placeSelectedStreamController.close();
+    placeSelectedSink.close();
   }
 
 }

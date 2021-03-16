@@ -25,6 +25,8 @@ class CardImageWithFabIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
 
+    internet = true;
+
     final card = Container(
       height: height,
       width: width,
