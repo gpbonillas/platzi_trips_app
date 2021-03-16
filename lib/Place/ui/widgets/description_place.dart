@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trips_app/Place/model/place.dart';
@@ -87,9 +88,7 @@ class DescriptionPlace extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-
               )
-
             ],
           );
         }
