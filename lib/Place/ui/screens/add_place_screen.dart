@@ -129,12 +129,15 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                           }
 
                           print('Image url: $imageUrl');
+                          print('name: $_controllerTitlePlace.value.text');
+                          print('description: $_controllerDescriptionPlace.value.text');
 
                           // 2. Cloud Firestore
                           // Place - title, description, url, userOwner, likes
                           userBloc.updatePlaceData(Place(
-                              name: _controllerTitlePlace.text,
-                              description: _controllerDescriptionPlace.text,
+                              name: _controllerTitlePlace.value.text,
+                              description: _controllerDescriptionPlace.value.text,
+                              urlImage: imageUrl,
                               likes: 0,
                             )).whenComplete(() {
                               print("TERMINÓ");
