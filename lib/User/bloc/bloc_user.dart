@@ -39,10 +39,15 @@ class UserBloc implements Bloc {
   // Para descargar imágenes de Firebase Storage y mostrarlas en Flutter
   Stream<QuerySnapshot> placesListStream
     = FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACES).snapshots();
+
   Stream<QuerySnapshot> get placestream => placesListStream;
   List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesListSnapshot)
   => _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
 
+  Stream<QuerySnapshot> myPlacesListStream(String uid)
+    => FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACES)
+          .where("userOwner", isEqualTo: FirebaseFirestore.instance.doc("${CloudFirestoreAPI().USERS}/${uid}"))
+          .snapshots();
 
   final _firebaseStorageRepository = FirebaseStorageRepository();
 

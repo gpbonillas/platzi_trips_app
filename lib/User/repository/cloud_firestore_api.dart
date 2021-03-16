@@ -55,7 +55,8 @@ class CloudFirestoreAPI {
         Place(
           name: element.data()['name'],
           description: element.data()['description'],
-          urlImage: element.data()['urlImage']
+          urlImage: element.data()['urlImage'],
+          likes: element.data()['likes'],
         )
       ));
     });
