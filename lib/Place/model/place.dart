@@ -6,12 +6,15 @@ class Place {
   String description;
   String urlImage;
   int likes;
+  bool liked;
 
   Place({
     Key key,
     @required this.name,
     @required this.description,
     @required this.urlImage,
-    this.likes,
+    @required this.likes,
+    this.liked,
+    this.uid,
   });
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +7,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_trips_app/Place/model/place.dart';
 import 'package:platzi_trips_app/Place/repository/firebase_storage_repository.dart';
-import 'package:platzi_trips_app/Place/ui/widgets/card_image.dart';
 import 'package:platzi_trips_app/User/repository/auth_repository.dart';
 import 'package:platzi_trips_app/User/repository/cloud_firestore_api.dart';
 import 'package:platzi_trips_app/User/repository/cloud_firestore_repository.dart';
@@ -41,9 +41,13 @@ class UserBloc implements Bloc {
   Stream<QuerySnapshot> placesListStream
     = FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACES).snapshots();
 
-  Stream<QuerySnapshot> get placestream => placesListStream;
-  List<CardImageWithFabIcon> buildPlaces(List<DocumentSnapshot> placesListSnapshot)
-    => _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  Stream<QuerySnapshot> get placesStream => placesListStream;
+  //List<CardImageWithFabIcon> buildPlaces(List<DocumentSnapshot> placesListSnapshot)
+    //=> _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+
+  List<Place> buildPlaces(List<DocumentSnapshot> placesListSnapshot, userModel.User user) => _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
+
+  Future likePlace(Place place, String uid) => _cloudFirestoreRepository.likePlace(place, uid);
 
   Stream<QuerySnapshot> myPlacesListStream(String uid)
     => FirebaseFirestore.instance.collection(CloudFirestoreAPI().PLACES)
@@ -52,6 +56,11 @@ class UserBloc implements Bloc {
 
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesListSnapshot)
   => _cloudFirestoreRepository.buildMyPlaces(placesListSnapshot);
+
+  // ignore: close_sinks
+  StreamController<Place> placeSelectedStreamController =  StreamController<Place>();
+  Stream<Place> get placeSelectedStream => placeSelectedStreamController.stream;
+  StreamSink<Place> get placeSelectedSink =>  placeSelectedStreamController.sink;
 
   final _firebaseStorageRepository = FirebaseStorageRepository();
 
@@ -64,7 +73,6 @@ class UserBloc implements Bloc {
 
   @override
   void dispose() {
-
   }
 
 }
