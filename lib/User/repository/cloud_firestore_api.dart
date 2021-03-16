@@ -81,12 +81,23 @@ class CloudFirestoreAPI {
           height: height,
           left: left,
           onPressedFabIcon: () {
-
+            // Like
+            likePlace(element.id);
           },
           iconData: iconData)
       );
     });
 
     return placesCard;
+  }
+
+  Future likePlace(String idPlace) async {
+    await _db.collection(PLACES).doc(idPlace).get().then((value) {
+      int likes = value.data()['likes'];
+
+      _db.collection(PLACES).doc(idPlace).update({
+        'likes': likes+1
+      });
+    });
   }
 }
